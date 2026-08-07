@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Saratoga Music — Instruments, Lessons &amp; Repairs</title>
+<meta name="description" content="A neighborhood music shop: new and used instruments, lessons for every age, and a repair bench that's been running for decades.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;600;700&family=Mulish:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --walnut:#4B3226;
+    --petrol:#1F4B4A;
+    --brass:#C79A45;
+    --burgundy:#7A2E2E;
+    --cream:#F5EEDF;
+    --paper:#F5EEDF;
+    --ink:#2A2018;
+    --ink-60: rgba(42,32,24,0.62);
+    --ink-30: rgba(42,32,24,0.26);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Mulish', sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{font-family:'Frank Ruhl Libre', serif; font-weight:600;}
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    text-transform:uppercase;
+    letter-spacing:0.15em;
+    font-size:0.7rem;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 clamp(20px,5vw,60px);}
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- signature: staff-line rule ---------- */
+  .staff-rule{
+    width:100%; height:24px;
+    background-repeat:repeat-x; background-size:48px 24px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='24' viewBox='0 0 48 24'><g stroke='%23C79A45' stroke-width='0.8'><line x1='0' y1='6' x2='48' y2='6'/><line x1='0' y1='10' x2='48' y2='10'/><line x1='0' y1='14' x2='48' y2='14'/><line x1='0' y1='18' x2='48' y2='18'/></g><circle cx='24' cy='14' r='3' fill='%237A2E2E'/></svg>");
+  }
+
+  /* ---------- header ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(245,238,223,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(42,32,24,0.12);
+  }
+  nav{display:flex; align-items:center; justify-content:space-between; padding:16px clamp(20px,5vw,60px);}
+  .logo{display:flex; align-items:center; gap:10px; font-family:'Frank Ruhl Libre',serif; font-size:1.15rem;}
+  .logo-mark{width:30px; height:30px;}
+  .logo em{font-style:italic; color:var(--burgundy);}
+  .nav-links{display:flex; gap:28px; align-items:center;}
+  .nav-links a{font-family:'IBM Plex Mono', monospace; font-size:0.66rem; text-transform:uppercase; letter-spacing:0.1em; position:relative; padding-bottom:3px;}
+  .nav-links a::after{content:''; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--burgundy); transition:width .3s ease;}
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{
+    background:var(--walnut); color:var(--cream);
+    padding:10px 20px; font-family:'IBM Plex Mono',monospace; font-size:0.65rem;
+    text-transform:uppercase; letter-spacing:0.1em;
+  }
+  .nav-toggle{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer;}
+  .nav-toggle span{width:22px; height:1.5px; background:var(--ink);}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative; min-height:94vh;
+    display:flex; align-items:center;
+    padding-top:110px;
+    background:var(--walnut); color:var(--cream);
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute; inset:0; opacity:0.08;
+    background-repeat:repeat;
+    background-size:96px 48px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='96' height='48' viewBox='0 0 96 48'><g stroke='%23F5EEDF' stroke-width='0.6'><line x1='0' y1='12' x2='96' y2='12'/><line x1='0' y1='20' x2='96' y2='20'/><line x1='0' y1='28' x2='96' y2='28'/><line x1='0' y1='36' x2='96' y2='36'/></g></svg>");
+  }
+  .hero-inner{position:relative; z-index:2;}
+  .eyebrow{display:flex; align-items:center; gap:14px; color:var(--brass); margin-bottom:24px;}
+  .eyebrow::before{content:''; width:32px; height:1px; background:var(--brass);}
+  .hero h1{font-size:clamp(2.6rem,6vw,4.6rem); line-height:1.08; max-width:780px;}
+  .hero h1 i{font-style:italic; color:var(--brass);}
+  .hero-sub{margin-top:28px; max-width:500px; font-size:1.06rem; line-height:1.8; color:rgba(245,238,223,0.78);}
+  .hero-cta{margin-top:40px; display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    display:inline-block; padding:15px 28px;
+    font-family:'IBM Plex Mono',monospace; font-size:0.7rem;
+    text-transform:uppercase; letter-spacing:0.13em;
+    background:var(--brass); color:var(--walnut); border:1px solid var(--brass);
+    transition:background .3s ease, color .3s ease;
+  }
+  .btn:hover{background:transparent; color:var(--brass);}
+  .btn-line{background:transparent; color:var(--cream); border:1px solid rgba(245,238,223,0.35);}
+  .btn-line:hover{background:rgba(245,238,223,0.1);}
+
+  .hero-facts{
+    margin-top:70px; padding-top:26px; border-top:1px solid rgba(245,238,223,0.16);
+    display:flex; gap:clamp(28px,6vw,60px); flex-wrap:wrap;
+  }
+  .fact-num{font-family:'Frank Ruhl Libre',serif; font-size:1.8rem; color:var(--brass);}
+  .fact-label{margin-top:4px; color:rgba(245,238,223,0.55); font-size:0.66rem; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.06em;}
+
+  /* ---------- section shell ---------- */
+  section{padding:110px 0;}
+  .section-head{display:flex; justify-content:space-between; align-items:flex-end; gap:36px; margin-bottom:58px; flex-wrap:wrap;}
+  .section-head .mono{color:var(--burgundy); display:block; margin-bottom:12px;}
+  .section-head h2{font-size:clamp(2rem,4.2vw,3rem); max-width:560px; color:var(--walnut);}
+  .section-head p{max-width:320px; color:var(--ink-60); line-height:1.7; font-size:0.94rem;}
+
+  /* ---------- instruments ---------- */
+  .instruments{background:var(--paper);}
+  .i-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:rgba(42,32,24,0.14);}
+  .i-card{background:var(--paper); padding:34px 24px; transition:background .3s ease;}
+  .i-card:hover{background:#ECE2CB;}
+  .i-thumb{aspect-ratio:1/1; background:var(--walnut); display:flex; align-items:center; justify-content:center; margin-bottom:16px;}
+  .i-thumb svg{width:50%;}
+  .i-title{font-family:'Frank Ruhl Libre',serif; font-size:1.05rem; margin-bottom:6px; color:var(--walnut);}
+  .i-desc{font-size:0.84rem; color:var(--ink-60); line-height:1.6; margin-bottom:8px;}
+  .i-price{font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--burgundy);}
+
+  /* ---------- lessons ---------- */
+  .lessons{background:var(--petrol); color:var(--cream);}
+  .lessons .section-head .mono{color:var(--brass);}
+  .lessons .section-head p{color:rgba(245,238,223,0.62);}
+  .l-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(245,238,223,0.14);}
+  .l-card{background:#194140; padding:38px 30px;}
+  .l-card h3{font-size:1.25rem; margin-bottom:12px;}
+  .l-card p{font-size:0.9rem; color:rgba(245,238,223,0.65); line-height:1.7; margin-bottom:16px;}
+  .l-meta{font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--brass);}
+
+  /* ---------- repair process ---------- */
+  .repair{background:var(--paper);}
+  .rp-list{border-top:1px solid rgba(42,32,24,0.16);}
+  .rp-item{
+    display:grid; grid-template-columns:70px 1fr 1fr; gap:30px;
+    padding:30px 0; border-bottom:1px solid rgba(42,32,24,0.16); align-items:start;
+  }
+  .rp-num{font-family:'Frank Ruhl Libre',serif; font-size:1.3rem; color:var(--burgundy);}
+  .rp-item h3{font-size:1.15rem; margin-bottom:6px; color:var(--walnut);}
+  .rp-item p{color:var(--ink-60); font-size:0.9rem; line-height:1.7;}
+
+  /* ---------- band ---------- */
+  .band{background:var(--burgundy); color:var(--cream); padding:90px 0; text-align:center;}
+  .band h2{font-size:clamp(1.7rem,4vw,2.5rem); max-width:740px; margin:0 auto 20px; font-style:italic; font-weight:500;}
+  .band .mono{color:var(--brass); display:block; margin-top:16px;}
+
+  /* ---------- visit ---------- */
+  .visit{background:var(--paper);}
+  .visit-grid{display:grid; grid-template-columns:1fr 1fr; gap:2px; background:rgba(42,32,24,0.14);}
+  .visit-card{background:var(--paper); padding:44px 36px;}
+  .visit-card h3{font-size:1.2rem; margin-bottom:20px; color:var(--walnut);}
+  .hour-row{display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid rgba(42,32,24,0.1); font-size:0.92rem;}
+  .hour-row:last-child{border-bottom:none;}
+  .hour-row span:first-child{color:var(--ink-60);}
+
+  /* ---------- newsletter ---------- */
+  .signup{background:var(--paper);}
+  .signup-box{
+    background:var(--walnut); color:var(--cream);
+    padding:clamp(44px,7vw,80px);
+    display:grid; grid-template-columns:1.2fr 1fr; gap:44px; align-items:center;
+  }
+  .signup-box h2{font-size:clamp(1.9rem,4.2vw,2.6rem); margin-bottom:14px;}
+  .signup-box p{color:rgba(245,238,223,0.82); line-height:1.7; max-width:400px;}
+  .signup-form{display:flex; gap:0; border-bottom:1px solid rgba(245,238,223,0.4); padding-bottom:12px;}
+  .signup-form input{
+    flex:1; background:transparent; border:none; outline:none;
+    color:var(--cream); font-family:'Mulish',sans-serif; font-size:1rem;
+  }
+  .signup-form input::placeholder{color:rgba(245,238,223,0.5);}
+  .signup-form button{
+    background:none; border:none; color:var(--brass);
+    font-family:'IBM Plex Mono',monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.12em;
+    cursor:pointer; padding-left:16px;
+  }
+
+  /* ---------- footer ---------- */
+  footer{background:var(--walnut); color:rgba(245,238,223,0.6); padding:64px 0 26px;}
+  .foot-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr 1fr; gap:36px; padding-bottom:44px;}
+  .foot-brand .logo{color:var(--cream); margin-bottom:14px;}
+  .foot-brand p{font-size:0.86rem; line-height:1.7; max-width:270px;}
+  .foot-col .mono{color:var(--brass); display:block; margin-bottom:16px;}
+  .foot-col a{display:block; font-size:0.86rem; margin-bottom:9px; color:rgba(245,238,223,0.65);}
+  .foot-col a:hover{color:var(--cream);}
+  .foot-bottom{display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; padding-top:22px; border-top:1px solid rgba(245,238,223,0.16); font-size:0.76rem;}
+
+  @media (max-width:920px){
+    .nav-links{display:none;}
+    .nav-toggle{display:flex;}
+    .i-grid{grid-template-columns:repeat(2,1fr);}
+    .l-grid{grid-template-columns:1fr;}
+    .rp-item{grid-template-columns:50px 1fr;}
+    .rp-item p{grid-column:2/3;}
+    .visit-grid{grid-template-columns:1fr;}
+    .signup-box{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:560px){
+    .i-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="18" fill="#4B3226"/>
+        <path d="M15 26 V13 L26 11 V24" stroke="#C79A45" stroke-width="1.6" fill="none"/>
+        <circle cx="14" cy="27" r="3" fill="#F5EEDF"/>
+        <circle cx="25" cy="25" r="3" fill="#F5EEDF"/>
+      </svg>
+      the saratoga <em>music</em>
+    </div>
+    <div class="nav-links">
+      <a href="#instruments">Instruments</a>
+      <a href="#lessons">Lessons</a>
+      <a href="#repair">Repairs</a>
+      <a href="#visit">Visit</a>
+      <a href="#signup" class="nav-cta">Book a Lesson</a>
+    </div>
+    <button class="nav-toggle" aria-label="menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="wrap hero-inner">
+    <div class="eyebrow mono">On Broadway since 1978</div>
+    <h1>Where half this town<br>learned to <i>play something.</i></h1>
+    <p class="hero-sub">New and used instruments, lessons for every age and instrument, and a repair bench in the back that's fixed more student violins than we've bothered to count.</p>
+    <div class="hero-cta">
+      <a href="#lessons" class="btn">Book a Lesson</a>
+      <a href="#instruments" class="btn btn-line">Browse Instruments</a>
+    </div>
+    <div class="hero-facts">
+      <div><div class="fact-num">46</div><div class="fact-label">Years on Broadway</div></div>
+      <div><div class="fact-num">12</div><div class="fact-label">Instructors on staff</div></div>
+      <div><div class="fact-num">200+</div><div class="fact-label">Instruments in stock</div></div>
+      <div><div class="fact-num">7</div><div class="fact-label">Repairs done a day, on average</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="staff-rule"></div>
+
+<section class="instruments" id="instruments">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="mono">The shop floor</span>
+        <h2>New, used, and student-ready</h2>
+      </div>
+      <p>Every used instrument gets a full setup on our bench before it goes on the floor.</p>
+    </div>
+    <div class="i-grid reveal">
+      <div class="i-card">
+        <div class="i-thumb"><svg viewBox="0 0 60 60" fill="none"><path d="M24 12 C18 20 18 30 24 40 C22 44 22 48 26 50 C30 48 30 44 28 40 C34 30 34 20 28 12" stroke="#F5EEDF" stroke-width="2" fill="none"/></svg></div>
+        <div class="i-title">Violins &amp; Strings</div>
+        <div class="i-desc">Student to intermediate, sized for kids through adults.</div>
+        <div class="i-price">from $180</div>
+      </div>
+      <div class="i-card">
+        <div class="i-thumb"><svg viewBox="0 0 60 60" fill="none"><rect x="16" y="16" width="28" height="28" rx="2" fill="#F5EEDF" opacity="0.85"/><line x1="20" y1="20" x2="40" y2="20" stroke="#4B3226"/><line x1="20" y1="26" x2="40" y2="26" stroke="#4B3226"/><line x1="20" y1="32" x2="40" y2="32" stroke="#4B3226"/></svg></div>
+        <div class="i-title">Pianos &amp; Keyboards</div>
+        <div class="i-desc">Digital pianos in stock now; acoustic pianos by special order.</div>
+        <div class="i-price">from $450</div>
+      </div>
+      <div class="i-card">
+        <div class="i-thumb"><svg viewBox="0 0 60 60" fill="none"><path d="M22 14 L38 14 L34 46 L26 46 Z" fill="#F5EEDF" opacity="0.85"/></svg></div>
+        <div class="i-title">Guitars &amp; Ukuleles</div>
+        <div class="i-desc">Acoustic, electric, and a wall of beginner ukuleles for kids.</div>
+        <div class="i-price">from $120</div>
+      </div>
+      <div class="i-card">
+        <div class="i-thumb"><svg viewBox="0 0 60 60" fill="none"><rect x="18" y="20" width="24" height="10" rx="5" fill="#F5EEDF" opacity="0.85"/><rect x="26" y="30" width="8" height="16" fill="#F5EEDF" opacity="0.6"/></svg></div>
+        <div class="i-title">Band &amp; Orchestra</div>
+        <div class="i-desc">Trumpets, clarinets, and full rental packages for school programs.</div>
+        <div class="i-price">rentals from $28/mo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lessons" id="lessons">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="mono">Lessons</span>
+        <h2>A teacher for almost anything with strings, keys, or a reed</h2>
+      </div>
+      <p>Private lessons run 30, 45, or 60 minutes — most students start weekly, then adjust.</p>
+    </div>
+    <div class="l-grid reveal">
+      <div class="l-card">
+        <h3>Kids &amp; Beginners</h3>
+        <p>Ages 5 and up, on piano, violin, guitar, or ukulele — first lessons focus on making it fun before it's technical.</p>
+        <span class="l-meta">Ages 5+ · All instruments</span>
+      </div>
+      <div class="l-card">
+        <h3>Teens &amp; Adults</h3>
+        <p>Structured lessons for school auditions, or casual ones for adults finally getting to that instrument in the closet.</p>
+        <span class="l-meta">Any age · Flexible pace</span>
+      </div>
+      <div class="l-card">
+        <h3>Ensemble &amp; Theory</h3>
+        <p>Small group classes in music theory and ensemble playing, for students ready to play with others.</p>
+        <span class="l-meta">Group sessions · By level</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="repair" id="repair">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="mono">The repair bench</span>
+        <h2>Same bench, same standard, every time</h2>
+      </div>
+      <p>Most repairs turn around in 3–5 days; rush service is available for performances.</p>
+    </div>
+    <div class="rp-list reveal">
+      <div class="rp-item">
+        <div class="rp-num">01</div>
+        <h3>Drop it off</h3>
+        <p>Bring the instrument in, describe the issue, and get a written estimate before any work starts.</p>
+      </div>
+      <div class="rp-item">
+        <div class="rp-num">02</div>
+        <h3>We diagnose and repair</h3>
+        <p>Our tech works on one instrument at a time — no batching student violins through on autopilot.</p>
+      </div>
+      <div class="rp-item">
+        <div class="rp-num">03</div>
+        <h3>Pickup &amp; playtest</h3>
+        <p>Every repair gets played before it goes back to you, not just inspected on the bench.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap reveal">
+    <h2>"My daughter's been taking violin here for three years. Same teacher, same shop, still excited every Tuesday."</h2>
+    <span class="mono">— K. Alvarez, parent</span>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="mono">Visit</span>
+        <h2>Hours &amp; location</h2>
+      </div>
+      <p>Street parking out front, small lot around back.</p>
+    </div>
+    <div class="visit-grid reveal">
+      <div class="visit-card">
+        <h3>Hours</h3>
+        <div class="hour-row"><span>Mon – Fri</span><span>10:00am – 7:00pm</span></div>
+        <div class="hour-row"><span>Saturday</span><span>10:00am – 5:00pm</span></div>
+        <div class="hour-row"><span>Sunday</span><span>Closed</span></div>
+      </div>
+      <div class="visit-card">
+        <h3>Getting here</h3>
+        <div class="hour-row"><span>Address</span><span>118 Broadway</span></div>
+        <div class="hour-row"><span>Parking</span><span>Street &amp; small rear lot</span></div>
+        <div class="hour-row"><span>Rentals</span><span>Bring school forms in-store</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="signup" id="signup">
+  <div class="wrap">
+    <div class="signup-box reveal">
+      <div>
+        <h2>Book a first lesson</h2>
+        <p>Leave your info and we'll match you with a teacher based on instrument, age, and schedule — usually within a day.</p>
+      </div>
+      <form class="signup-form" onsubmit="return false;">
+        <input type="email" placeholder="you@example.com" required>
+        <button type="submit">Join →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo">the saratoga <em style="font-style:italic;color:var(--brass);">music</em></div>
+        <p>A neighborhood music shop on Broadway — instruments, lessons, and repairs since 1978.</p>
+      </div>
+      <div class="foot-col">
+        <span class="mono">Shop</span>
+        <a href="#instruments">Instruments</a>
+        <a href="#instruments">Rentals</a>
+        <a href="#repair">Repairs</a>
+      </div>
+      <div class="foot-col">
+        <span class="mono">Learn</span>
+        <a href="#lessons">Lessons</a>
+        <a href="#lessons">Ensembles</a>
+        <a href="#signup">Book a lesson</a>
+      </div>
+      <div class="foot-col">
+        <span class="mono">Visit</span>
+        <a href="#visit">Hours</a>
+        <a href="#visit">Directions</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 The Saratoga Music. Instruments, lessons &amp; repairs since 1978.</span>
+      <span>thesaratogamusic.shop</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.querySelector('.nav-links');
+  toggle?.addEventListener('click', ()=>{
+    const open = links.style.display === 'flex';
+    links.style.display = open ? 'none' : 'flex';
+    links.style.cssText += open ? '' : 'position:fixed;top:64px;left:0;right:0;background:#F5EEDF;flex-direction:column;padding:24px;gap:18px;border-bottom:1px solid rgba(42,32,24,0.12);';
+  });
+</script>
+
+</body>
+</html>
